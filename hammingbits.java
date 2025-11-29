@@ -5,7 +5,7 @@ public class hammingbits {
 
         String parityScheme = "EVEN"; 
 
-        // ------- CALCULATE PARITY BITS -------
+        // CALCULATE PARITY BITS
         int h1 = calculateParity(msg, 1, parityScheme);
         int h2 = calculateParity(msg, 2, parityScheme);
         int h3 = calculateParity(msg, 4, parityScheme);
@@ -15,7 +15,7 @@ public class hammingbits {
         msg[2] = h2;
         msg[4] = h3;
 
-        System.out.println("\nEncoded stream:");
+        System.out.println("\n Encoded stream:");
         for(int x : msg) System.out.print(x+" ");
         System.out.println();
 
@@ -30,13 +30,14 @@ public class hammingbits {
         int c2 = calculateParity(msg, 2, parityScheme);
         int c3 = calculateParity(msg, 4, parityScheme);
 
+        // left shift is for multiplication
         int errorpos = (c3 << 2) | (c2 << 1) | c1;
 
         if(errorpos == 0) {
             System.out.println("\n No error detected");
         } else {
             System.out.println("\n Error at position: " + errorpos);
-            msg[errorpos] ^= 1; // correct
+            msg[errorpos] ^= 1; // bit flip
         }
 
         System.out.println("\nCorrected message:");
